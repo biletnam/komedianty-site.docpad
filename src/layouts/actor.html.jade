@@ -1,0 +1,55 @@
+---
+layout: default
+---
+
+article#post.post
+	h1= document.title
+
+	if document.photo && document.photo.length
+		figure
+			img(src=document.photo title=document.title alt=document.title)
+
+	.post-content!= content
+
+	if document.employment && document.employment.length
+		section#employment
+			h3 Занят(а) в спектаклях
+			ul.employment-list
+				each doc in document.employment
+					li
+						if (typeof(doc) == "object")
+							- console.dir(doc)
+							each key, value in doc
+								= key
+								|  — 
+								= doc
+						else
+							:t(render="markdown")
+								#{doc}
+
+	if document.cinema && document.cinema.length
+		section#cinema
+			h3 Роли в кино и сериалах
+			ul.cinema-list
+				each doc in document.cinema
+					li
+						:t(render="markdown")
+							#{doc}
+
+	if document.kinoteatr && document.kinoteatr.length
+		a(href=kinoteatr title="#{document.title} на Кино-Театр.ru")
+			img(src="/images/stories/random/kino-teatr-88x31.gif" height="30px" width="auto")
+	if document.ruskino && document.ruskino.length
+		a(href=ruskino title="#{document.title} на RusKino.ru")
+			img(src="/images/stories/random/rus-.png" height="30px" width="auto")
+
+	footer
+		if document.relatedDocuments && document.relatedDocuments.length
+			section#related
+				h3 Related Posts
+				nav.linklist
+					each doc in document.relatedDocuments
+						li
+							span= doc.date.toDateString()
+							|  &raquo;&nbsp;
+							a(href=doc.url)= doc.title

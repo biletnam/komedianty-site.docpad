@@ -1,0 +1,12 @@
+---
+title: Репертуар
+layout: page
+pageOrder: 4
+---
+
+nav.linklist
+	each doc in getCollection('performances').toJSON()
+		li
+			span= doc.date.toDateString()
+			| &raquo;&nbsp;
+			a(href=doc.url)= doc.title
