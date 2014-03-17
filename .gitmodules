@@ -1,0 +1,3 @@
+[submodule "src/documents/test"]
+	path = src/documents/test
+	url = git://github.com/abnmt/komedianty-theater-articles.git
