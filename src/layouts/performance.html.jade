@@ -1,0 +1,47 @@
+---
+layout: default
+---
+
+article#post.post
+	h1= document.title
+
+	if document.poster && document.poster.length
+		figure
+			img(src=document.poster title=document.title alt=document.title)
+
+	if document.author && document.author.length
+		h2=document.author
+	if document.genre && document.genre.length
+		strong=document.genre
+
+	if document.synopsis && document.synopsis.length
+		p=document.synopsis
+
+	if document.premiere_date && document.premiere_date.length
+		p Премьера состоялась #{document.premiere_date}
+	if document.duration && document.duration.length
+		p
+		| Длительность спектакля — #{document.duration}
+		if document.entracte && document.entracte =="1"
+			|  с одним антрактом
+		if document.entracte && document.entracte =="0"
+			|  без антракта
+
+	.post-content!= content
+
+	if document.photo && document.photo.length
+		.photos
+			each image in document.photo
+				figure
+					img(src=image)
+
+	footer
+		if document.relatedDocuments && document.relatedDocuments.length
+			section#related
+				h3 Related Posts
+				nav.linklist
+					each doc in document.relatedDocuments
+						li
+							span= doc.date.toDateString()
+							|  &raquo;&nbsp;
+							a(href=doc.url)= doc.title
