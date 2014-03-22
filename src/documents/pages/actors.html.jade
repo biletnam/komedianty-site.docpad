@@ -5,8 +5,7 @@ pageOrder: 3
 ---
 
 nav.linklist
-	each doc in getCollection('actors').toJSON()
-		li
-			span= doc.date.toDateString()
-			| &raquo;&nbsp;
-			a(href=doc.url)= doc.title
+	ol
+		each doc in getCollection('actors').toJSON()
+			li
+				a(href=doc.url)= doc.title

@@ -2,8 +2,27 @@
 layout: default
 ---
 
+- var entracte = ""
+if document.entracte
+	- var entracte = (document.entracte == "1") ? " с одним антрактом" : " без антракта"
+
+- var rate = (document.rate && document.rate.length) ? " «" + document.rate + "»" : ""
+
 article#post.post
-	h1= document.title
+
+	header
+		if document.navlinks
+			- var navlinks = document.navlinks
+			nav.posts-nav
+				ul.pager
+					if navlinks.url.prev
+						li.previous-link
+							a(href=navlinks.url.prev) ← #{navlinks.title.prev}
+					if navlinks.url.next
+						li.next-link
+							a(href=navlinks.url.next) #{navlinks.title.next} →
+
+	h1= document.title + rate
 
 	if document.poster && document.poster.length
 		figure
@@ -12,7 +31,16 @@ article#post.post
 	if document.author && document.author.length
 		h2=document.author
 	if document.genre && document.genre.length
-		strong=document.genre
+		p: strong=document.genre
+
+	if document.authors && document.authors.length
+		//- - console.log("\n")
+		//- - console.dir(document.authors)
+		dl.authors.dl-horizontal
+			each author in document.authors
+				each key, value in author
+					dt(style="width:250px;text-align:left;")=value
+					dd(style="margin-left:250px")=key
 
 	if document.synopsis && document.synopsis.length
 		p=document.synopsis
@@ -20,12 +48,7 @@ article#post.post
 	if document.premiere_date && document.premiere_date.length
 		p Премьера состоялась #{document.premiere_date}
 	if document.duration && document.duration.length
-		p
-		| Длительность спектакля — #{document.duration}
-		if document.entracte && document.entracte =="1"
-			|  с одним антрактом
-		if document.entracte && document.entracte =="0"
-			|  без антракта
+		p Длительность спектакля — #{document.duration}#{entracte}
 
 	.post-content!= content
 
@@ -36,12 +59,13 @@ article#post.post
 					img(src=image)
 
 	footer
-		if document.relatedDocuments && document.relatedDocuments.length
-			section#related
-				h3 Related Posts
-				nav.linklist
-					each doc in document.relatedDocuments
-						li
-							span= doc.date.toDateString()
-							|  &raquo;&nbsp;
-							a(href=doc.url)= doc.title
+		if document.navlinks
+			- var navlinks = document.navlinks
+			nav.posts-nav
+				ul.pager
+					if navlinks.url.prev
+						li.previous-link
+							a(href=navlinks.url.prev) ← #{navlinks.title.prev}
+					if navlinks.url.next
+						li.next-link
+							a(href=navlinks.url.next) #{navlinks.title.next} →

@@ -86,6 +86,17 @@ docpadConfig =
 		actors: (database) ->
 			database.findAllLive({relativeOutDirPath:'actors'},[title:1])
 
+	plugins:
+		cleanurls:
+			trailingSlashes: true
+		navlinks:
+			collections:
+				actors: 1
+				performances: 1
+				posts: -1
+		jade:
+			jadeOptions:
+				pretty: true
 
 	# DocPad Events
 	# =============

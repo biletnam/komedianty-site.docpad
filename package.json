@@ -1,8 +1,7 @@
 {
-  "name": "twitter-bootstrap.docpad",
-  "version": "0.9.0",
-  "description": "Twitter Bootstrap skeleton for DocPad. Simple and flexible HTML, CSS, and Javascript for popular user interface components and interactions.",
-  "homepage": "https://github.com/bevry/twitter-bootstrap.docpad",
+  "name": "komedianty-site.docpad",
+  "version": "0.0.1",
+  "description": "…",
   "keywords": [
     "docpad-skeleton",
     "docpad",
@@ -10,19 +9,10 @@
     "bootstrap",
     "twitter bootstrap"
   ],
-  "author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
-  "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
-  ],
-  "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
-  ],
-  "bugs": {
-    "url": "https://github.com/docpad/twitter-bootstrap.docpad/issues"
-  },
+  "author": "Abnmt",
   "repository": {
     "type": "git",
-    "url": "http://github.com/docpad/twitter-bootstrap.docpad.git"
+    "url": "https://github.com/abnmt/komedianty-site.docpad"
   },
   "engines": {
     "node": "0.8.x",
@@ -40,7 +30,8 @@
     "docpad-plugin-text": "~2.3.2",
     "docpad-plugin-jade": "~2.6.2",
     "docpad-plugin-related": "~2.2.2",
-    "marked": "*"
+    "marked": "*",
+    "docpad-plugin-navlinks": "~2.0.2"
   },
   "devDependencies": {
     "docpad-plugin-livereload": "~2.6.0",

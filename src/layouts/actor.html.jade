@@ -2,8 +2,18 @@
 layout: default
 ---
 
+
+
+if document.gender == "male"
+	- var male = ( document.gender == "male" ) ? true : false
+if document.grade && document.grade.length
+	-var grade = document.grade
+
 article#post.post
-	h1= document.title
+	h1
+		small=grade
+		|  
+		=document.title
 
 	if document.photo && document.photo.length
 		figure
@@ -13,43 +23,44 @@ article#post.post
 
 	if document.employment && document.employment.length
 		section#employment
-			h3 Занят(а) в спектаклях
+			if male
+				h3 Занят в спектаклях
+			if !male
+				h3 Занята в спектаклях
+
 			ul.employment-list
 				each doc in document.employment
-					li
-						if (typeof(doc) == "object")
-							- console.dir(doc)
-							each key, value in doc
-								= key
-								|  — 
-								= doc
-						else
-							:t(render="markdown")
-								#{doc}
+					li= doc
+
+	if document.theater && document.theater.length
+		section#theater
+			h3 Роли в кино и сериалах
+			ul.theater-list
+				each doc in document.theater
+					li= doc
 
 	if document.cinema && document.cinema.length
 		section#cinema
 			h3 Роли в кино и сериалах
 			ul.cinema-list
 				each doc in document.cinema
-					li
-						:t(render="markdown")
-							#{doc}
+					li= doc
 
 	if document.kinoteatr && document.kinoteatr.length
-		a(href=kinoteatr title="#{document.title} на Кино-Театр.ru")
+		a(href=document.kinoteatr title="#{document.title} на Кино-Театр.ru")
 			img(src="/images/stories/random/kino-teatr-88x31.gif" height="30px" width="auto")
 	if document.ruskino && document.ruskino.length
-		a(href=ruskino title="#{document.title} на RusKino.ru")
+		a(href=document.ruskino title="#{document.title} на RusKino.ru")
 			img(src="/images/stories/random/rus-.png" height="30px" width="auto")
 
 	footer
-		if document.relatedDocuments && document.relatedDocuments.length
-			section#related
-				h3 Related Posts
-				nav.linklist
-					each doc in document.relatedDocuments
-						li
-							span= doc.date.toDateString()
-							|  &raquo;&nbsp;
-							a(href=doc.url)= doc.title
+		if document.navlinks
+			- var navlinks = document.navlinks
+			nav.posts-nav
+				ul.pager
+					if navlinks.url.prev
+						li.previous-link
+							a(href=navlinks.url.prev) ← #{navlinks.title.prev}
+					if navlinks.url.next
+						li.next-link
+							a(href=navlinks.url.next) #{navlinks.title.next} →

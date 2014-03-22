@@ -4,6 +4,7 @@ jos_id: 87
 jos_alias: "aleksandr-shevelov"
 modified: "2013-06-25"
 
+gender: male
 title: Александр Шевелёв
 
 employment:
@@ -37,7 +38,7 @@ cinema:
 - «Убойная сила-1»
 
 kinoteatr: http://www.kino-teatr.ru/kino/acter/m/ros/8974/bio/
-photo: "/images/actors/Shevelev-Aleksandr.jpg"
+photo: /images/actors/Shevelev-Aleksandr.jpg
 ---
 
 Родился 5 сентября 1948 года.
