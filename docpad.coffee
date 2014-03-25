@@ -77,14 +77,14 @@ docpadConfig =
 			database.findAllLive({pageOrder: $exists: true}, [pageOrder:1,title:1])
 
 		# This one, will fetch in all documents that will be outputted to the posts directory
-		posts: (database) ->
-			database.findAllLive({relativeOutDirPath:'posts'},[title:1])
+		# posts: (database) ->
+		# 	database.findAllLive({relativeOutDirPath:'posts'},[title:1])
 
 		performances: (database) ->
-			database.findAllLive({relativeOutDirPath:'performances'},[title:1])
+			database.findAllLive({relativeOutDirPath:'performance'},[title:1])
 
 		actors: (database) ->
-			database.findAllLive({relativeOutDirPath:'actors'},[title:1])
+			database.findAllLive({relativeOutDirPath:'actor'},[title:1])
 
 	plugins:
 		cleanurls:
@@ -93,7 +93,6 @@ docpadConfig =
 			collections:
 				actors: 1
 				performances: 1
-				posts: -1
 		jade:
 			jadeOptions:
 				pretty: true

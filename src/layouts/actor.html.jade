@@ -7,9 +7,23 @@ layout: default
 if document.gender == "male"
 	- var male = ( document.gender == "male" ) ? true : false
 if document.grade && document.grade.length
-	-var grade = document.grade
+	- var grade = document.grade
 
 article#post.post
+
+	header
+		if document.navlinks
+			- var navlinks = document.navlinks
+			nav.posts-nav
+				ul.pager
+					if navlinks.url.prev
+						li.previous-link
+							a(href=navlinks.url.prev) ← #{navlinks.title.prev}
+					if navlinks.url.next
+						li.next-link
+							a(href=navlinks.url.next) #{navlinks.title.next} →
+
+
 	h1
 		small=grade
 		|  

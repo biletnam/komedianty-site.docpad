@@ -9,75 +9,86 @@
 - scripts.add(["/vendor/jquery/dist/jquery.js"])
 
 //- Bootstrap
-- scripts.add(["/vendor/components-bootstrap/js/bootstrap.js"])
-- styles.add(["/vendor/components-bootstrap/css/bootstrap.css"])
+- scripts.add(["//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"])
+- styles.add(["//netdna.bootstrapcdn.com/bootswatch/3.1.1/yeti/bootstrap.min.css"])
 
 //- Other Scripts
 - scripts.add(["/vendor/log.js","/vendor/modernizr.js"])
 
 //- User
+
+if document.scripts
+	- scripts.add(document.scripts)
+if document.styles
+	- styles.add(document.styles)
+
 - styles.add(["/styles/style.css"])
 - scripts.add(["/scripts/script.js"])
 
 doctype 5
 html(lang="en")
-  head
+	head
 
-    // Meta
-    meta(charset="utf-8")
-    meta(http-equiv="content-type", content="text/html; charset=utf-8")
+		// Meta
+		meta(charset="utf-8")
+		meta(http-equiv="content-type", content="text/html; charset=utf-8")
 
-    //-
-      Use the .htaccess and remove these lines to avoid edge case issues.
-      More info: h5bp.com/i/378
-    meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+		//-
+			Use the .htaccess and remove these lines to avoid edge case issues.
+			More info: h5bp.com/i/378
+		meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
 
-    //- Our site title and description
-    title= getPreparedTitle()
-    meta(name="description", content=getPreparedDescription())
-    meta(name="keywords", content=getPreparedKeywords())
-    meta(name="author", content=site.author || '')
+		//- Our site title and description
+		title= getPreparedTitle()
+		meta(name="description", content=getPreparedDescription())
+		meta(name="keywords", content=getPreparedKeywords())
+		meta(name="author", content=site.author || '')
 
-    //- Output DocPad produced meta elements
-    != getBlock('meta').toHTML()
+		//- Output DocPad produced meta elements
+		!= getBlock('meta').toHTML()
 
-    //- Mobile viewport optimized: h5bp.com/viewport
-    meta(name="viewport", content="width=device-width")
+		//- Mobile viewport optimized: h5bp.com/viewport
+		meta(name="viewport", content="width=device-width")
 
-    // Icons
-    link(rel="shortcut icon", href="/ico/favicon.ico")
-    link(rel="apple-touch-icon-precomposed", sizes="144x144", href="/ico/apple-touch-icon-144-precomposed.png")
-    link(rel="apple-touch-icon-precomposed", sizes="114x114", href="/ico/apple-touch-icon-114-precomposed.png")
-    link(rel="apple-touch-icon-precomposed", sizes="72x72", href="/ico/apple-touch-icon-72-precomposed.png")
-    link(rel="apple-touch-icon-precomposed", href="/ico/apple-touch-icon-57-precomposed.png")
+		// Icons
+		link(rel="shortcut icon", href="/ico/favicon.ico")
+		link(rel="apple-touch-icon-precomposed", sizes="144x144", href="/ico/apple-touch-icon-144-precomposed.png")
+		link(rel="apple-touch-icon-precomposed", sizes="114x114", href="/ico/apple-touch-icon-114-precomposed.png")
+		link(rel="apple-touch-icon-precomposed", sizes="72x72", href="/ico/apple-touch-icon-72-precomposed.png")
+		link(rel="apple-touch-icon-precomposed", href="/ico/apple-touch-icon-57-precomposed.png")
 
-    //- Shims: IE6-8 support of HTML5 elements
-    //if lt IE 9
-      script(async src="http://html5shim.googlecode.com/svn/trunk/html5.js")
+		//- Shims: IE6-8 support of HTML5 elements
+		//if lt IE 9
+			script(async src="http://html5shim.googlecode.com/svn/trunk/html5.js")
 
-    // Styles
-    != styles.toHTML()
+		// Styles
+		!= styles.toHTML()
 
-  body
+		// Block Styles
+		block styles
 
-    // Markup
-    nav.navbar.navbar-default.navbar-fixed-top
-      .container
-        .navbar-header
-          a.navbar-brand(href="/") Welcome
-        ul.nav.navbar-nav
-          each doc in getCollection('pages').toJSON()
-            - clazz = (document.url === doc.url) ? 'active' : null
-            li(typeof="sioc:Page", about=doc.url, class=clazz)
-              a(href=doc.url, property="dc:title")= doc.title
-    .container
-      .row
-        .col-md-8.col-md-offset-2
-          section#content.content!= content
-          hr
-          footer
-            div= site.copyright
-            div(style="font-style:italic; font-size: 12px") This website was last updated at #{site.date}
+	body
 
-    // Scripts
-    != scripts.toHTML()
+		// Markup
+		nav.navbar.navbar-default.navbar-fixed-top
+			.container
+				.navbar-header
+					a.navbar-brand(href="/") Театр «Комедианты»
+				ul.nav.navbar-nav
+					each doc in getCollection('pages').toJSON()
+						- clazz = (document.url === doc.url) ? 'active' : null
+						li(typeof="sioc:Page", about=doc.url, class=clazz)
+							a(href=doc.url, property="dc:title")= doc.title
+		.container
+			.row
+				.col-md-12
+					main#content.content(role="main")!= content
+			.row
+				.col-md-12
+					hr
+					footer
+						div= site.copyright
+						div(style="font-style:italic; font-size: 12px") Последнее обновление #{site.date}
+
+		// Scripts
+		!= scripts.toHTML()
