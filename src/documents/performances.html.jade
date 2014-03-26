@@ -4,126 +4,51 @@ layout: default
 pageOrder: 4
 ---
 
-//- styles: ["/vendor/grid-gallery/css/component.css"]
-//- scripts: ["/vendor/grid-gallery/js/imagesloaded.pkgd.min.js","/vendor/grid-gallery/js/masonry.pkgd.min.js","/vendor/grid-gallery/js/classie.js","/vendor/grid-gallery/js/cbpGridGallery.js","/vendor/grid-gallery/js/modernizr.custom.js","http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"]
+block append styles
+	style.
+		.perfomance figure {
+			float: left;
+			margin: 0;
+			margin-right: 1em;
+		}
+		.perfomance figure img {
+			height: 18em;
+			width: auto;
+		}
 
+h2=document.title
 
+#repertoire.row
+	each doc,key in getCollection('performances').toJSON()
 
-//- block append styles
-//- 	style.
-//- 		.perfomance figure {
+		- var title = doc.title ? doc.title : "Без названия"
+		- var author = doc.author ? doc.author : "Без автора"
+		- var genre = doc.genre ? doc.genre : "Без жанра"
+		- var synopsis = doc.synopsis ? doc.synopsis.split(/\n/) : ["Без аннотации"]
+		- var duration = doc.duration ? doc.duration : ""
+		- var premiere_date = doc.premiere_date ? doc.premiere_date : ""
+		- var poster = doc.poster ? doc.poster : "/images/no-poster.jpg"
 
-//- 		}
-//- 		.perfomance figure img {
-//- 			width: 100%;
-//- 			height: auto;
-//- 			max-width: 100%;
-//- 			max-height: 100%;
-//- 		}
+		if doc.entracte && doc.entracte == "1"
+			- var entracte = " с одним антрактом"
+		if doc.entracte && doc.entracte == "0"
+			- var entracte = " без антракта"
+		if !doc.entracte
+			- var entracte = ""
 
-
-//- .controls
-//- 	label Filter:
-//- 	button.filter.active(data-filter='all') All
-//- 	each doc in getCollection('performances').toJSON()
-//- 		button.filter(data-filter='genre:#{doc.genre}')=doc.genre
-//- 	label Sort:
-//- 	button.sort(data-sort='myorder:asc') Asc
-//- 	button.sort(data-sort='myorder:desc') Desc
-//- 	button.sort(data-sort='random') Random
-
-.gallery-container
-	#grid-gallery.grid-gallery
-		section.grid-wrap
-			ul.grid#mixit-up
-				li.grid-sizer
-				// for Masonry column width
-				each doc,key in getCollection('performances').toJSON()
-
-					- var title = doc.title ? doc.title : "none"
-					- var author = doc.author ? doc.author : "none"
-					- var genre = doc.genre ? doc.genre : "none"
-					- var synopsis = doc.synopsis ? doc.synopsis : "none"
-					- var duration = doc.duration ? doc.duration : "none"
-					- var poster = doc.poster ? doc.poster : "/images/no-poster.jpg"
-
-					if doc.entracte && doc.entracte == "1"
-						- var entracte = " с одним антрактом"
-					if doc.entracte && doc.entracte == "0"
-						- var entracte = " без антракта"
-					if !doc.entracte
-						- var entracte = ""
-					li.mix(data-myorder=key data-genre=genre)
-						figure
-							img(src=poster, alt="Афиша спектакля «#{title}»")
-
-		// grid-wrap 
-		section.slideshow
-			ul
-				each doc,key in getCollection('performances').toJSON()
-
-					- var title = doc.title ? doc.title : "none"
-					- var author = doc.author ? doc.author : "none"
-					- var genre = doc.genre ? doc.genre : "none"
-					- var synopsis = doc.synopsis ? doc.synopsis : "none"
-					- var duration = doc.duration ? doc.duration : "none"
-					- var poster = doc.poster ? doc.poster : "/images/no-poster.jpg"
-
-					if doc.entracte && doc.entracte == "1"
-						- var entracte = " с одним антрактом"
-					if doc.entracte && doc.entracte == "0"
-						- var entracte = " без антракта"
-					if !doc.entracte
-						- var entracte = ""
-					li
-						figure
-							img(src=poster, alt="Афиша спектакля «#{title}»")
-							figcaption
-								h3: a(href=doc.url)=title
-								p
-									strong=author
-								p
-									em=genre
-								p=synopsis
-								p Длительность: #{duration}#{entracte}
-
-			nav
-				span.icon.nav-prev
-				span.icon.nav-next
-				span.icon.nav-close
-			.info-keys.icon Navigate with arrow keys
-
-nav.linklist
-	ol
-		each doc in getCollection('performances').toJSON()
-			li
-				a(href=doc.url)= doc.title
-
-//- #repertoire.row
-//- 	each doc,key in getCollection('performances').toJSON()
-
-//- 		- var title = doc.title ? doc.title : "none"
-//- 		- var author = doc.author ? doc.author : "none"
-//- 		- var genre = doc.genre ? doc.genre : "none"
-//- 		- var synopsis = doc.synopsis ? doc.synopsis : "none"
-//- 		- var duration = doc.duration ? doc.duration : "none"
-//- 		- var poster = doc.poster ? doc.poster : "/images/no-poster.jpg"
-
-//- 		if doc.entracte && doc.entracte == "1"
-//- 			- var entracte = " с одним антрактом"
-//- 		if doc.entracte && doc.entracte == "0"
-//- 			- var entracte = " без антракта"
-//- 		if !doc.entracte
-//- 			- var entracte = ""
-
-//- 		.perfomance(data-order="order#{key}").col-md-6
-//- 			figure
-//- 				img(src=poster)
-//- 			h1=title
-//- 			p
-//- 				strong=author
-//- 			p
-//- 				em=genre
-//- 			.synopsis
-//- 				p!=synopsis
-//- 			p Длительность: #{duration}#{entracte}
+		.perfomance.col-md-6
+			h3: a(src=doc.url)=title
+			p(style="float:right")
+				em=genre
+			p
+				strong=author
+			figure
+				img(src=poster)
+			.synopsis
+				each string in synopsis
+					p=string
+			if duration != ""
+				p: strong Длительность: #{duration}#{entracte}
+			if premiere_date != ""
+				p: em Премьера состоялась #{moment(premiere_date).lang("ru").format('LL')}
+				//- - console.dir(moment.duration(100))
