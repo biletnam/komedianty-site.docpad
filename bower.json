@@ -1,6 +1,6 @@
 {
-  "name": "twitter-bootstrap-jade.docpad",
+  "name": "komedianty-site.docpad",
   "dependencies": {
-    "components-bootstrap": "~3.0.3"
+    "slick-carousel": "~1.2.10"
   }
 }

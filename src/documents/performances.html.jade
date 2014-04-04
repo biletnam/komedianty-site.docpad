@@ -24,7 +24,7 @@ h2=document.title
 		- var title = doc.title ? doc.title : "Без названия"
 		- var author = doc.author ? doc.author : "Без автора"
 		- var genre = doc.genre ? doc.genre : "Без жанра"
-		- var synopsis = doc.synopsis ? doc.synopsis.split(/\n/) : ["Без аннотации"]
+		- var synopsis = doc.synopsis ? doc.synopsis.split(/\n/) : ""
 		- var duration = doc.duration ? doc.duration : ""
 		- var premiere_date = doc.premiere_date ? doc.premiere_date : ""
 		- var poster = doc.poster ? doc.poster : "/images/no-poster.jpg"
@@ -44,9 +44,10 @@ h2=document.title
 				strong=author
 			figure
 				img(src=poster)
-			.synopsis
-				each string in synopsis
-					p=string
+			if synopsis != ""
+				.synopsis
+					each string in synopsis
+						p=string
 			if duration != ""
 				p: strong Длительность: #{duration}#{entracte}
 			if premiere_date != ""

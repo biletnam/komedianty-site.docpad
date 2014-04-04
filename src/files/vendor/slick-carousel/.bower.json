@@ -1,0 +1,36 @@
+{
+  "name": "slick-carousel",
+  "main": "js/slick.js",
+  "version": "1.2.10",
+  "homepage": "https://github.com/kenwheeler/slick",
+  "authors": [
+    "Ken Wheeler <ken_wheeler@me.com>"
+  ],
+  "description": "the last carousel you'll ever need",
+  "keywords": [
+    "responsive",
+    "carousel",
+    "jquery"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "index.html"
+  ],
+  "dependencies": {
+    "jquery": "~1.7"
+  },
+  "_release": "1.2.10",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.2.10",
+    "commit": "5f893ec94d6a9b48cc222c054152f9969da7ebd5"
+  },
+  "_source": "git://github.com/kenwheeler/slick.git",
+  "_target": "~1.2.10",
+  "_originalSource": "slick-carousel"
+}

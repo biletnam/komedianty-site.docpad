@@ -1,12 +1,12 @@
 - var scripts = getBlock('scripts')
 - var styles = getBlock('styles')
 
-//- Prettify Syntax Highlighting
-- scripts.add(["/vendor/prettify.js"])
-- styles.add(["/vendor/prettify.css"])
-
 //- jQuery
-- scripts.add(["/vendor/jquery/dist/jquery.js"])
+- scripts.add(["/vendor/jquery/jquery.min.js"])
+
+//- Slick Carousel
+- scripts.add(["/vendor/slick-carousel/js/slick.min.js"])
+- styles.add(["/vendor/slick-carousel/css/slick.css"])
 
 //- Bootstrap
 - scripts.add(["//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"])
@@ -26,7 +26,7 @@ if document.styles
 - scripts.add(["/scripts/script.js"])
 
 doctype 5
-html(lang="en")
+html(lang="ru")
 	head
 
 		// Meta
@@ -69,7 +69,6 @@ html(lang="en")
 
 	body
 
-		// Markup
 		nav.navbar.navbar-default.navbar-fixed-top
 			.container
 				.navbar-header
